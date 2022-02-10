@@ -7,7 +7,7 @@ evaluation_details: templates/evaluation_details.html
 terms_and_conditions: templates/terms_and_conditions.html
 image: logo.jpg
 submission_guidelines: templates/submission_guidelines.html
-leaderboard_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras egestas a libero nec sagittis.
+leaderboard_description: The leadboard is ordered with R2 score by default.
 evaluation_script: evaluation_script.zip
 remote_evaluation: False
 is_docker_based: False
@@ -19,31 +19,31 @@ leaderboard:
   - id: 1
     schema:
       {
-        "labels": ["Metric1", "Metric2", "Metric3", "Total"],
-        "default_order_by": "Total",
+        "labels": ["R2 score", "MSE", "MAE", "Total"],
+        "default_order_by": "R2 score",
         "metadata": {
-          "Metric1": {
+          "R2 score: {
             "sort_ascending": True,
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "description": "Coefficient of determination.",
           },
-          "Metric2": {
-            "sort_ascending": True,
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "MSE": {
+            "sort_ascending": False,
+            "description": "Mean Squared error",
           }
         }
       }
 
 challenge_phases:
   - id: 1
-    name: Dev Phase
+    name: Pseudo Test Phase
     description: templates/challenge_phase_1_description.html
     leaderboard_public: False
     is_public: True
     is_submission_public: True
-    start_date: 2019-01-19 00:00:00
+    start_date: 2020-20-10 00:00:00
     end_date: 2099-04-25 23:59:59
-    test_annotation_file: annotations/test_annotations_devsplit.json
-    codename: dev
+    test_annotation_file: annotations/test_labels_regression.csv
+    codename: pseudo-test
     max_submissions_per_day: 5
     max_submissions_per_month: 50
     max_submissions: 50
@@ -75,17 +75,17 @@ challenge_phases:
         required: True
     is_restricted_to_select_one_submission: False
     is_partial_submission_evaluation_enabled: False
-    allowed_submission_file_types: ".json, .zip, .txt, .tsv, .gz, .csv, .h5, .npy, .npz"
+    allowed_submission_file_types: ".csv"
   - id: 2
-    name: Test Phase
+    name: Dev Phase
     description: templates/challenge_phase_2_description.html
     leaderboard_public: True
     is_public: True
     is_submission_public: True
-    start_date: 2019-01-01 00:00:00
+    start_date: 2022-05-01 00:00:00
     end_date: 2099-05-24 23:59:59
-    test_annotation_file: annotations/test_annotations_testsplit.json
-    codename: test
+    test_annotation_file: annotations/test_labels_regression.csv
+    codename: dev
     max_submissions_per_day: 5
     max_submissions_per_month: 50
     max_submissions: 50
@@ -117,10 +117,7 @@ challenge_phases:
     is_partial_submission_evaluation_enabled: False
 
 dataset_splits:
-  - id: 1
-    name: Train Split
-    codename: train_split
-  - id: 2
+  - id: q
     name: Test Split
     codename: test_split
 
@@ -134,12 +131,6 @@ challenge_phase_splits:
   - challenge_phase_id: 2
     leaderboard_id: 1
     dataset_split_id: 1
-    visibility: 3
-    leaderboard_decimal_precision: 2
-    is_leaderboard_order_descending: True
-  - challenge_phase_id: 2
-    leaderboard_id: 1
-    dataset_split_id: 2
     visibility: 1
     leaderboard_decimal_precision: 2
     is_leaderboard_order_descending: True
