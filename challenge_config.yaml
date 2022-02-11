@@ -1,11 +1,11 @@
 # If you are not sure what all these fields mean, please refer our documentation here:
 # https://evalai.readthedocs.io/en/latest/configuration.html
-title: Predicting psychiatric symptom severity
-short_description: Predicting psychiatric symptom severity on a dimensional level (i.e. multiple regression task) challenge.
+title: Multiple Psychiatric Developmental Diagnosis
+short_description: Predicting multiple psychiatric developmental diagnosis (i.e. multi-task multi-label classification) challenge.
 description: templates/description.html
 evaluation_details: templates/evaluation_details.html
 terms_and_conditions: templates/terms_and_conditions.html
-image: logo.jpg
+image: logo.png
 submission_guidelines: templates/submission_guidelines.html
 leaderboard_description: The leadboard is ordered with R2 score by default.
 evaluation_script: evaluation_script.zip
@@ -19,16 +19,20 @@ leaderboard:
   - id: 1
     schema:
       {
-        "labels": ["R2 score", "MSE", "MAE", "Total"],
+        "labels": ["R2 score", "MSE", "MAE"],
         "default_order_by": "R2 score",
         "metadata": {
-          "R2 score: {
+          "R2 score": {
             "sort_ascending": True,
             "description": "Coefficient of determination.",
           },
           "MSE": {
             "sort_ascending": False,
             "description": "Mean Squared error",
+          },
+          "MAE": {
+            "sort_ascending": False,
+            "description": "Mean Absolute error",
           }
         }
       }
@@ -40,7 +44,7 @@ challenge_phases:
     leaderboard_public: False
     is_public: True
     is_submission_public: True
-    start_date: 2020-20-10 00:00:00
+    start_date: 2019-01-19 00:00:00
     end_date: 2099-04-25 23:59:59
     test_annotation_file: annotations/test_labels_regression.csv
     codename: pseudo-test
@@ -50,29 +54,17 @@ challenge_phases:
     default_submission_meta_attributes:
       - name: method_name
         is_visible: True
+        required: True
       - name: method_description
         is_visible: True
       - name: project_url
         is_visible: True
-      - name: publication_url
-        is_visible: True
-    submission_meta_attributes:
-      - name: TextAttribute
-        description: Sample
-        type: text
-        required: False
-      - name: SingleOptionAttribute
-        description: Sample
-        type: radio
-        options: ["A", "B", "C"]
-      - name: MultipleChoiceAttribute
-        description: Sample
-        type: checkbox
-        options: ["alpha", "beta", "gamma"]
-      - name: TrueFalseField
-        description: Sample
-        type: boolean
         required: True
+    submission_meta_attributes:
+      - name: On which data did you train your model?
+        description: 
+        type: radio
+        options: ["Sensor level", "Source level"]
     is_restricted_to_select_one_submission: False
     is_partial_submission_evaluation_enabled: False
     allowed_submission_file_types: ".csv"
@@ -82,9 +74,9 @@ challenge_phases:
     leaderboard_public: True
     is_public: True
     is_submission_public: True
-    start_date: 2022-05-01 00:00:00
+    start_date: 2019-01-01 00:00:00
     end_date: 2099-05-24 23:59:59
-    test_annotation_file: annotations/test_labels_regression.csv
+    test_annotation_file: annotations/test_annotations_testsplit.json
     codename: dev
     max_submissions_per_day: 5
     max_submissions_per_month: 50
@@ -117,7 +109,7 @@ challenge_phases:
     is_partial_submission_evaluation_enabled: False
 
 dataset_splits:
-  - id: q
+  - id: 1
     name: Test Split
     codename: test_split
 
@@ -131,6 +123,6 @@ challenge_phase_splits:
   - challenge_phase_id: 2
     leaderboard_id: 1
     dataset_split_id: 1
-    visibility: 1
+    visibility: 3
     leaderboard_decimal_precision: 2
     is_leaderboard_order_descending: True
