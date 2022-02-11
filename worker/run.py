@@ -14,11 +14,11 @@ def run():
     sys.path.append("{}/challenge_data/challenge_1".format(current_working_directory))
 
     challenge_id = 1
-    challenge_phase = "test"  # Add the challenge phase codename to be tested
-    annotation_file_path = "{}/annotations/test_annotations_testsplit.json".format(
+    challenge_phase = "pseudo-test"  # Add the challenge phase codename to be tested
+    annotation_file_path = "{}/annotations/test_labels_regression.csv".format(
         current_working_directory
     )  # Add the test annotation file path
-    user_submission_file_path = "{}/submission.json".format(
+    user_submission_file_path = "{}/predicted_labels_reg_MOR_randfor.csv".format(
         current_working_directory
     )  # Add the sample submission file path
 
