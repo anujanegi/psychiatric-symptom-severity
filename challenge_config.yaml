@@ -84,30 +84,21 @@ challenge_phases:
     default_submission_meta_attributes:
       - name: method_name
         is_visible: True
+        required: True
       - name: method_description
         is_visible: True
       - name: project_url
         is_visible: True
-      - name: publication_url
-        is_visible: True
+        required: True
     submission_meta_attributes:
-      - name: TextAttribute
-        description: Sample
-        type: text
-      - name: SingleOptionAttribute
-        description: Sample
+      - name: On which data did you train your model?
+        description: 
         type: radio
-        options: ["A", "B", "C"]
-      - name: MultipleChoiceAttribute
-        description: Sample
-        type: checkbox
-        options: ["alpha", "beta", "gamma"]
-      - name: TrueFalseField
-        description: Sample
-        type: boolean
+        options: ["Sensor level", "Source level"]
     is_restricted_to_select_one_submission: False
     is_partial_submission_evaluation_enabled: False
-
+    allowed_submission_file_types: ".csv"
+    
 dataset_splits:
   - id: 1
     name: Test Split
